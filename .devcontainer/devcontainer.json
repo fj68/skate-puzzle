@@ -1,0 +1,35 @@
+{
+    "image":"mcr.microsoft.com/devcontainers/typescript-node:16",
+    "waitFor": "onCreateCommand",
+    "updateContentCommand": "npm install && npm run build",
+    "postCreateCommand": "",
+    "postAttachCommand": {
+        "server": "npm run dev"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "esbenp.prettier-vscode",
+                "dbaeumer.vscode-eslint",
+                "vscode-icons-team.vscode-icons"
+            ],
+            "settings": {
+                "files.trimTrailingWhitespace": true,
+                "editor.formatOnSave": true,
+                "typescript.updateImportsOnFileMove.enabled": "always",
+                "javascript.updateImportsOnFileMove.enabled": "always",
+                "prettier.tabWidth": 2,
+                "[typescript]": {
+                    "editor.defaultFormatter": "esbenp.prettier-vscode"
+                }
+            }
+        }
+    },
+    "portsAttributes": {
+        "3000": {
+            "label": "Application",
+            "onAutoForward": "openPreview"
+        }
+    },
+    "forwardPorts": [3000]
+}
