@@ -1,0 +1,17 @@
+{
+  "name": "skate-puzzle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test",
+    "build": "tsc",
+    "dev": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/fj68/skate-puzzle"
+  },
+  "author": "fj68",
+  "license": "MIT"
+}
