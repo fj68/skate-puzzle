@@ -35,7 +35,7 @@ export class Mapdata implements IEqualable<Mapdata>, IStringer {
           mapdata.putHorizontalWall(new Position(x, y));
         }
         if ((v & 2) != 0) {
-          mapdata.putVerticalWall(new Position(x, y));
+          mapdata.putVerticalWall(new Position(y, x)); // x and y should be flipped here
         }
       }
     }

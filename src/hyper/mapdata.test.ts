@@ -45,12 +45,16 @@ describe("Mapdata.from", () => {
       }
 
       for (const hWall of testcase.expected.horizontalWalls) {
-        const horizontalWalls = Array.from(mapdata.horizontalWalls[hWall.x].values())
+        const horizontalWalls = Array.from(
+          mapdata.horizontalWalls[hWall.x].values()
+        );
         expect(horizontalWalls).toContain(hWall.y);
       }
 
       for (const vWall of testcase.expected.verticalWalls) {
-        const verticalWalls = Array.from(mapdata.verticalWalls[vWall.y].values())
+        const verticalWalls = Array.from(
+          mapdata.verticalWalls[vWall.y].values()
+        );
         expect(verticalWalls).toContain(vWall.x);
       }
     });
