@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test",
+    "test": "jest",
     "build": "tsc",
     "dev": "tsc"
   },
@@ -13,5 +13,14 @@
     "url": "github.com/fj68/skate-puzzle"
   },
   "author": "fj68",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "eslint": "^9.22.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "prettier": "^3.5.3",
+    "ts-jest": "^29.2.6",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
+  }
 }
