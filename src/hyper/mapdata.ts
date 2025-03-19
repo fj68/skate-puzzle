@@ -16,6 +16,32 @@ export class Mapdata implements IEqualable<Mapdata>, IStringer {
       .fill(0)
       .map(() => new Set<number>());
   }
+  static from(input: number[][]): Mapdata | undefined {
+    const h = input.length;
+    if (h <= 4) {
+      return undefined;
+    }
+    const w = input[0].length;
+    if (w <= 4) {
+      return undefined;
+    }
+    const mapdata = new Mapdata(new Size(w, h));
+
+    for (let y = 0; y < h; y++) {
+      for (let x = 0; x < w; x++) {
+        const v = input[y][x];
+
+        if ((v & 1) != 0) {
+          mapdata.putHorizontalWall(new Position(x, y));
+        }
+        if ((v & 2) != 0) {
+          mapdata.putVerticalWall(new Position(x, y));
+        }
+      }
+    }
+
+    return mapdata;
+  }
   putHorizontalWall(position: Position): void {
     this.horizontalWalls[position.x].add(position.y);
   }
