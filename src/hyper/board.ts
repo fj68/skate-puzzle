@@ -75,35 +75,62 @@ export class Board {
         return this.#nextStopNorth(current);
       case Directions.West:
         return this.#nextStopWest(current);
+      case Directions.South:
+        return this.#nextStopSouth(current);
+      case Directions.East:
+        return this.#nextStopEast(current);
     }
-    return current;
   }
   #nextStopNorth(current: Position): Position {
-    const actorYs = this.actors
-      .values()
+    const actorYs = Array.from(this.actors.values())
       .filter(
         (actor) =>
           actor.position.x === current.x && actor.position.y < current.y
       )
-      .map((actor) => actor.position.y);
-    const wallYs = this.mapdata.horizontalWalls[current.x].filter(
-      (wall) => wall <= current.y
-    );
+      .map((actor) => actor.position.y + 1);
+    const wallYs = Array.from(
+      this.mapdata.horizontalWalls[current.x].values()
+    ).filter((wall) => wall <= current.y);
     const y = Math.max(0, ...actorYs, ...wallYs);
     return new Position(current.x, y);
   }
   #nextStopWest(current: Position): Position {
-    const actorXs = this.actors
-      .values()
+    const actorXs = Array.from(this.actors.values())
       .filter(
         (actor) =>
           actor.position.y === current.y && actor.position.x < current.x
       )
-      .map((actor) => actor.position.x);
-    const wallXs = this.mapdata.verticalWalls[current.y].filter(
-      (wall) => wall <= current.x
-    );
+      .map((actor) => actor.position.x + 1);
+    const wallXs = Array.from(
+      this.mapdata.verticalWalls[current.y].values()
+    ).filter((wall) => wall <= current.x);
     const x = Math.max(0, ...actorXs, ...wallXs);
     return new Position(x, current.y);
+  }
+  #nextStopSouth(current: Position): Position {
+    const actorYs = Array.from(this.actors.values())
+      .filter(
+        (actor) =>
+          actor.position.x === current.x && actor.position.y > current.y
+      )
+      .map((actor) => actor.position.y);
+    const wallYs = Array.from(this.mapdata.horizontalWalls[current.x].values())
+      .filter((wall) => wall > current.y)
+      .map((wall) => wall);
+    const y = Math.min(this.mapdata.size.height, ...actorYs, ...wallYs);
+    return new Position(current.x, y - 1);
+  }
+  #nextStopEast(current: Position): Position {
+    const actorXs = Array.from(this.actors.values())
+      .filter(
+        (actor) =>
+          actor.position.y === current.y && actor.position.x > current.x
+      )
+      .map((actor) => actor.position.x);
+    const wallXs = Array.from(
+      this.mapdata.verticalWalls[current.y].values()
+    ).filter((wall) => wall > current.x);
+    const x = Math.min(this.mapdata.size.width, ...actorXs, ...wallXs);
+    return new Position(x - 1, current.y);
   }
 }
