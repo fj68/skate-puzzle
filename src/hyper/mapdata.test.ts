@@ -28,7 +28,7 @@ describe("Mapdata.from", () => {
           new Position(4, 4),
         ],
         verticalWalls: [
-          new Position(0, 4),
+          new Position(4, 0),
           new Position(4, 2),
           new Position(2, 4),
         ],
